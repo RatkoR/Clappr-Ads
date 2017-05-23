@@ -189,12 +189,46 @@
         bindEvents: function() {
             // wait for core to be ready
             this.listenTo(this.core, Clappr.Events.CORE_READY, (function() {
+console.log('container before', this.core.containers);
+
                 // get container
                 var container = this.core.getCurrentContainer();
                 // listeners
                 container.listenTo(container.playback, Clappr.Events.PLAYBACK_PLAY, this._onPlaybackPlay.bind(this, container));
                 container.listenTo(container.playback, Clappr.Events.PLAYBACK_TIMEUPDATE, this._onPlaybackTimeUpdate.bind(this, container));
                 container.listenTo(container.playback, Clappr.Events.PLAYBACK_ENDED, this._onPlaybackEnd.bind(this));
+
+                container.destroy();
+
+//                this.core.containerFactory.options.sources = ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4'];
+//                this.core.createContainers(this.core.options);
+                var sources = [
+                    'http://vid01.24ur.com/2017/03/10/0865ad8d37_61898341-1.mp4',
+                    'https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
+                    'http://api.24ur.si/video/eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwb3AiLCJhdWQiOiJwb3AiLCJpYXQiOjE0OTU1NDI0MjYsImV4cCI6MTQ5NTU0NjAyNiwiY29udGV4dCI6eyJza2lwX2dlb2xvY2siOiIxIiwiZXhwaXJlcyI6IjE0OTU2Mjg4MjYiLCJkcm1fcHJvdGVjdGVkIjoiIiwibWVkaWFfcHVibGlzaGVkX2Zyb20iOiIxNDk1NTQyMDY2IiwibWVkaWFfcHVibGlzaGVkX3RvIjoiMTQ5NTYyODgyNiIsIm1lZGlhX2dlb2xvY2siOiIiLCJ2aXNpdG9yX2lwIjoiOTEuMjAyLjY1LjExMiIsIm1lZGlhX2ZpbGVuYW1lIjoiYzY4ODAyMjRjNl82MTg1OTQ4MiJ9fQ.tR-WrnDpruo04jMWs3YytuwF9OecOYe7Zw-dI2hYRng/1480287600/c6880224c6_61859482/index.m3u8',
+                    'http://www.quirksmode.org/html5/videos/big_buck_bunnysdfsdf.mp4'
+                ];
+//this.core.containerFactory.options.sources = sources;
+//console.log(this.core.containerFactory.options);
+
+//this.core.containerFactory.createContainers().then(function (containers) {
+//    console.log('aaaa', containers);
+//    this.core.setupContainers(containers);
+//this.core.mediaControl.setContainer(containers[0]);
+
+//    this.listenTo(this.core, Clappr.Events.CONTAINER_ENDED, function () {
+//        console.log('end container');
+//    });
+
+//    console.log('container after 2', this.core.getCurrentContainer());
+
+//}.bind(this));
+
+//                console.log('container after', this.core.getCurrentContainer());
+
+console.log('load?', sources[0], this._preRoll);
+                this.core.load(sources[0]);
+
             }).bind(this));
         },
 
