@@ -198,7 +198,7 @@ console.log('container before', this.core.containers);
                 container.listenTo(container.playback, Clappr.Events.PLAYBACK_TIMEUPDATE, this._onPlaybackTimeUpdate.bind(this, container));
                 container.listenTo(container.playback, Clappr.Events.PLAYBACK_ENDED, this._onPlaybackEnd.bind(this));
 
-                container.destroy();
+//                container.destroy();
 
 //                this.core.containerFactory.options.sources = ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4'];
 //                this.core.createContainers(this.core.options);
@@ -226,13 +226,20 @@ console.log('container before', this.core.containers);
 
 //                console.log('container after', this.core.getCurrentContainer());
 
-console.log('load?', sources[0], this._preRoll);
-                this.core.load(sources[0]);
+//console.log('load?', sources[0], this._preRoll);
+//                this.core.load(sources[0]);
 
             }).bind(this));
         },
 
-        _onPlaybackPlay: function(container) {
+        _onPlaybackPlay: function (container) {
+            if (!this._preRoll) {
+console.log('have preroll');
+                this.core.load(this._preRoll.src);
+                return;
+            }
+return;
+
             // if ad is playing, pause
             // otherwise, start pre-roll
             if (this._isAdPlaying) {
